@@ -9,21 +9,23 @@
       </transition>
     </div>
 
-    <!-- <TheBottom /> -->
+    <div class="the-bottom d-none">
+      <TheBottom />
+    </div>
   </div>
 </template>
 
 <script>
 import Sidebar from "../components/TheSidebar.vue";
 import TheHeader from "../components/Layouts/TheHeader.vue";
-// import TheBottom from "../components/Layouts/TheBottom.vue";
+import TheBottom from "../components/Layouts/TheBottom.vue";
 import Modal from "../components/Modal.vue";
 import { mapState, mapGetters } from "vuex";
 export default {
   components: {
     Sidebar,
     TheHeader,
-    // TheBottom,
+    TheBottom,
     Modal,
   },
   computed: {
@@ -67,6 +69,9 @@ export default {
   #dashboard {
     .main {
       width: 100%;
+    }
+    .the-bottom {
+      display: block !important;
     }
   }
 }

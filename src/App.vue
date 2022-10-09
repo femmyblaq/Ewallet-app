@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ darkMode: toggleLight }">
     <Header
       v-if="
         !['Dashboard', 'FundAccount', 'Withdraw', 'SetPin', 'Payment'].includes(
@@ -7,99 +7,32 @@
         )
       "
     />
-    <div class="row m-0 p-0">
-      <div
-        class="col-lg-7 m-0 p-0"
-        v-if="
-          ![
-            'Dashboard',
-            'FundAccount',
-            'Withdraw',
-            'SetPin',
-            'Payment',
-          ].includes($route.name)
-        "
-      >
-        <div
-          id="carouselExampleIndicators"
-          class="carousel slide"
-          data-bs-ride="carousel"
-        >
-          <div class="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="0"
-              class="active"
-              aria-current="true"
-              aria-label="Slide 1"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="2"
-              aria-label="Slide 3"
-            ></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="./assets/secondBigScreen.png" class="lg-img" alt="" />
-              <img src="./assets/first-imgGirl.png" class="sm-img" alt="" />
-            </div>
-            <div class="carousel-item">
-              <img src="./assets/bigScreen.png" class="lg-img" alt="" />
-              <img src="./assets/secondImg.png" class="sm-img" alt="" />
-            </div>
-            <div class="carousel-item">
-              <img src="./assets/bigScreenII.png" class="lg-img" alt="" />
-
-              <img src="./assets/thirdImg.png" class="sm-img" alt="" />
-            </div>
-          </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-      <!-- <div class="col-lg-5 m-auto"> -->
-
-      <!-- </div> -->
-    </div>
+    <CarouselSideVue
+      v-if="
+        !['Dashboard', 'FundAccount', 'Withdraw', 'SetPin', 'Payment'].includes(
+          $route.name
+        )
+      "
+      :class="{ clearCarousel: clearCarousel }"
+    />
     <transition name="slide">
-      <router-view />
+      <div class="homeRouter">
+        <router-view />
+      </div>
     </transition>
     <!-- <HomePage /> -->
   </div>
 </template>
 <script>
 import { mapGetters } from "vuex";
+import CarouselSideVue from "./components/CarouselSide.vue";
 // import HomePage from "./views/Home.vue";
 import Header from "@/components/Header";
 
 export default {
   components: {
     Header,
+    CarouselSideVue,
     // HomePage,
   },
   computed: {
@@ -107,20 +40,13 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   transition: all 0.5s ease;
-  // overflow: hidden;
 }
-// #app {
-// background-color: #fff;
-// position: absolute;
-// top: 0;
-// left: 0;
-// }
 .backgroundDark {
   background-color: rgba(0, 0, 0, 0.9) !important;
 }
@@ -130,18 +56,31 @@ export default {
   overflow: hidden;
 }
 #app {
-  overflow: hidden;
+  overflow: hidden !important;
+  .homeRouter {
+    width: 50%;
+    height: 89.4vh;
+    overflow: hidden;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    // border: 1px solid #000;
+  }
   .slide-enter-active,
   .slide-leave-active {
     transition: 0.8s ease all;
   }
-  .slide-enter-from,
+  .slide-enter-from {
+    transform: translateY(800px);
+    // right: -400px;
+  }
   .slide-leave-to {
-    transform: translateX(100px);
+    transform: translateY(0);
+    // margin-right: -300px;
   }
 
   .lg-img {
-    height: 89.3vh;
+    height: 89.4vh;
     width: 100%;
   }
   .sm-img {
@@ -151,15 +90,23 @@ export default {
     grid-template-columns: 1fr 1fr;
   }
 }
-@media (min-width: 568px) and (max-width: 1024px) {
+@media (min-width: 540px) and (max-width: 1024px) {
   #app {
+    position: static;
     overflow: scroll !important;
+    display: grid !important;
+    grid-template-columns: 1fr;
     .d-grid {
       grid-template-columns: 1fr;
     }
     .lg-img {
-      height: 60vh;
+      height: 70vh;
       width: 100% !important;
+    }
+    .homeRouter {
+      position: static !important;
+      width: 100%;
+      height: auto;
     }
   }
 }
@@ -188,6 +135,11 @@ export default {
       // justify-content: center;
       // align-items: center;
     }
+    .homeRouter {
+      width: 100%;
+      height: 89.5vh !important;
+      z-index: 1 !important;
+    }
 
     .slide-enter-from,
     .slide-leave-to {
@@ -198,8 +150,12 @@ export default {
 @media (min-width: 200px) and (max-width: 375px) {
   #app {
     height: 100vh;
+    .carousel-item img {
+      margin: 20px auto !important;
+    }
     .carousel-indicators {
       bottom: -40px !important;
+      z-index: 1 !important;
     }
     .carousel-indicators button {
       background-color: #444 !important;
@@ -221,11 +177,22 @@ export default {
       // justify-content: center;
       // align-items: center;
     }
-
-    .slide-enter-from,
-    .slide-leave-to {
-      transform: translateY(1700px);
+    .clearCarousel {
+      display: none !important;
     }
+    .homeRouter {
+      width: 100%;
+      height: 89.5vh;
+      z-index: 1 !important;
+    }
+
+    // .slide-enter-from {
+    //   transform: translateY(700px);
+    // }
+    // .slide-leave-to {
+    //   top: 70px !important;
+    //   transform: translateY(70px);
+    // }
   }
 }
 .h1,

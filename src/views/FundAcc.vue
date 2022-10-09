@@ -12,6 +12,15 @@
           <label class="form-label" for="form2">#Amount</label>
         </div>
 
+        <div class="form-outline my-4">
+          <input
+            type="number"
+            id="form2"
+            class="form-control form-control-lg rounded-0"
+          />
+          <label class="form-label" for="form2">#Email</label>
+        </div>
+
         <div class="pt-1 mb-4">
           <button
             class="btn btn-dark btn-lg btn-block rounded-0 w-100"

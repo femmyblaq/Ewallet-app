@@ -25,7 +25,10 @@
             mode_nightnpm
           </span> -->
         <div class="d-flex justify-content-center align-items-center">
-          <span class="button" @click="toggleLightMethod"
+          <span
+            class="button"
+            :class="{ 'main-button': toggleLight }"
+            @click="toggleLightMethod"
             ><span
               class="round-button"
               :class="{ 'inner-button': toggleLight }"
@@ -40,6 +43,12 @@
 <script>
 import { mapMutations, mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      mobile: false,
+    };
+  },
+
   methods: {
     ...mapMutations(["TOGGLE_LIGHT"]),
     toggleLightMethod() {
@@ -83,7 +92,7 @@ export default {
     background: #fff;
     width: 40px;
     height: 19px;
-    border: 1px solid #222221;
+    border: 1px solid #ccc;
     border-radius: 40px;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 4px 2px -1px rgba(0, 0, 0, 0.06);
@@ -94,16 +103,19 @@ export default {
     z-index: 1;
     width: 17px;
     height: 17px;
-    background: #303030;
+    background: #ccc;
     border-radius: 50%;
     // top: 0;
     left: -1px !important;
 
     transition: 200ms ease-in-out all;
   }
+  .main-button {
+    background: rgb(162, 162, 163);
+  }
   .inner-button {
     left: 21px !important;
-    background: rgb(211, 228, 241);
+    background: rgb(66, 66, 67);
   }
 }
 img {

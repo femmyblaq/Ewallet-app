@@ -167,6 +167,9 @@ export default {
         font-size: 1rem;
       }
     }
+    .nav-container {
+      display: none !important;
+    }
   }
   .sidebar {
     transform: translateX(0) !important;
