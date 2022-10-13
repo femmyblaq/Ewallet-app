@@ -50,6 +50,12 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 #forgotpass {
+  width: 50%;
+  height: 89.4vh;
+  overflow: hidden;
+  position: absolute;
+  top: 70px;
+  right: 0;
   overflow: hidden;
 }
 @media (min-width: 200px) and (max-width: 450px) {

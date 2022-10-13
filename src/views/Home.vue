@@ -3,10 +3,12 @@
     <!-- <CarouselSideVue /> -->
     <div id="home" :class="{ darkMode: toggleLight }">
       <!-- v-if="!['Login', 'Register', 'ForgotPassword'].includes($route.name)" -->
-      <div class="home m-auto">
-        <div class="welcome px-2 mt-5 my-auto">
+      <div class="home d-flex justify-content-center">
+        <div class="welcome">
           <!-- <Login /> -->
-          <h1 class="text-center" :class="{ h1: toggleLight }">Welcome!</h1>
+          <h1 class="text-center fw-bold" :class="{ h1: toggleLight }">
+            Welcome!
+          </h1>
           <p class="my-4" :class="{ p: toggleLight }">
             In order to use this platform, you have to Login your details and if
             you don't have an account already, click on register and begin one
@@ -57,20 +59,14 @@ export default {
 <style lang="scss">
 #home {
   // width: 50%;
-  // height: 89.2vh;
-  // position: absolute;
-  // top: 10.5%;
-  // right: 0;
-  margin: auto;
+  height: calc(100vh - 70px);
+
   .home {
-    width: auto;
-    margin-top: 40% !important;
-    transform: translateY(-50%);
-    padding: 30px;
     height: 100%;
 
     .welcome {
-      margin-top: 80px;
+      border: 1px solid #f00;
+      margin: auto 30px;
     }
   }
 }
@@ -79,41 +75,16 @@ export default {
 }
 @media (min-width: 376px) and (max-width: 476px) {
   #home {
-    height: 89.5vh;
+    height: 10vh;
     .home {
-      padding: 10px;
-      margin-top: 0 !important;
-      transform: none;
+      display: block !important;
+      padding: 20px;
+      align-items: end;
+      width: 100%;
+      margin-top: 50px;
     }
     .welcome {
-      margin-top: 180% !important;
-      .grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr;
-        align-items: flex-end;
-        justify-content: end;
-      }
-    }
-    a {
-      margin: 0 5px !important;
-      width: 95% !important;
-    }
-    h1,
-    p {
-      display: none;
-    }
-  }
-}
-@media (min-width: 200px) and (max-width: 375px) {
-  #home {
-    height: 89.5vh;
-    .home {
-      padding: 10px;
-      margin-top: 0 !important;
-      transform: none;
-    }
-    .welcome {
-      margin-top: 150% !important;
+      margin: 0 !important;
       .grid {
         display: grid !important;
         grid-template-columns: 1fr 1fr;
@@ -138,12 +109,50 @@ export default {
     // }
   }
 }
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 200px) and (max-width: 375px) {
   #home {
+    height: 10vh;
     .home {
-      margin-top: 20% !important;
+      display: block !important;
+      padding: 20px;
+      align-items: end;
+      width: 100%;
+      margin-top: 50px;
+    }
+    .welcome {
+      margin: 0 !important;
+      .grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        align-items: flex-end;
+        justify-content: end;
+      }
+    }
+    a {
+      margin: 0 5px !important;
+      width: 95% !important;
+    }
+    // a:nth-child(2) {
+    //   margin-top: 30px !important;
+    //   margin-left: 10px !important;
+    // }
+    h1,
+    p {
+      display: none;
+    }
+    // .btn {
+    //   margin: 0;
+    // }
+  }
+}
+@media (min-width: 568px) and (max-width: 1024px) {
+  #home {
+    height: calc(50vh - 70px);
+    .home {
+      margin: auto !important;
       // transform: translateY(-50%);
       // padding: 30px;
+      width: 70%;
       height: 100%;
     }
 

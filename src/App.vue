@@ -7,33 +7,40 @@
         )
       "
     />
-    <CarouselSideVue
-      v-if="
-        !['Dashboard', 'FundAccount', 'Withdraw', 'SetPin', 'Payment'].includes(
-          $route.name
-        )
-      "
-      :class="{ clearCarousel: clearCarousel }"
-    />
-    <transition name="slide">
-      <div class="homeRouter">
+    <div class="d-grid">
+      <CarouselSideVue />
+      <transition name="slide">
         <router-view />
-      </div>
-    </transition>
-    <!-- <HomePage /> -->
+      </transition>
+    </div>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import CarouselSideVue from "./components/CarouselSide.vue";
 // import HomePage from "./views/Home.vue";
 import Header from "@/components/Header";
 
 export default {
+  data() {
+    return {
+      mobileView: false,
+    };
+  },
   components: {
     Header,
     CarouselSideVue,
     // HomePage,
+  },
+  created() {
+    this.isMobileMethod();
+    if (this.$route.name === "Register") {
+      document.addEventListener("resize", this.isMobileMethod);
+    }
+    console.log("Created hook at the app page..");
+  },
+  methods: {
+    ...mapActions(["isMobileMethod"]),
   },
   computed: {
     ...mapGetters(["toggleLight"]),
@@ -46,6 +53,7 @@ export default {
   margin: 0;
   padding: 0;
   transition: all 0.5s ease;
+  font-family: "Source Sans Pro", "Titilium Web", "Open Sans";
 }
 .backgroundDark {
   background-color: rgba(0, 0, 0, 0.9) !important;
@@ -56,16 +64,7 @@ export default {
   overflow: hidden;
 }
 #app {
-  overflow: hidden !important;
-  .homeRouter {
-    width: 50%;
-    height: 89.4vh;
-    overflow: hidden;
-    position: absolute;
-    top: 70px;
-    right: 0;
-    // border: 1px solid #000;
-  }
+  height: calc(100vh - 70px);
   .slide-enter-active,
   .slide-leave-active {
     transition: 0.8s ease all;
@@ -80,7 +79,7 @@ export default {
   }
 
   .lg-img {
-    height: 89.4vh;
+    height: calc(100vh - 70px);
     width: 100%;
   }
   .sm-img {
@@ -102,11 +101,6 @@ export default {
     .lg-img {
       height: 70vh;
       width: 100% !important;
-    }
-    .homeRouter {
-      position: static !important;
-      width: 100%;
-      height: auto;
     }
   }
 }
@@ -135,10 +129,8 @@ export default {
       // justify-content: center;
       // align-items: center;
     }
-    .homeRouter {
-      width: 100%;
-      height: 89.5vh !important;
-      z-index: 1 !important;
+    .d-grid {
+      display: block !important;
     }
 
     .slide-enter-from,
@@ -149,12 +141,30 @@ export default {
 }
 @media (min-width: 200px) and (max-width: 375px) {
   #app {
-    height: 100vh;
-    .carousel-item img {
-      margin: 20px auto !important;
+    height: calc(100vh - 70px);
+    .carousel-item {
+      img {
+        margin: 20px auto !important;
+        // padding: 20px;
+      }
+      .lg-img {
+        display: none !important;
+      }
+      .sm-img {
+        width: 85%;
+        height: 70vh;
+        margin: auto !important;
+        display: block;
+        border-radius: 15px;
+        // justify-content: center;
+        // align-items: center;
+      }
+    }
+    .d-grid {
+      display: block !important;
     }
     .carousel-indicators {
-      bottom: -40px !important;
+      bottom: -60px !important;
       z-index: 1 !important;
     }
     .carousel-indicators button {
@@ -165,25 +175,8 @@ export default {
       z-index: 111;
     }
 
-    .lg-img {
-      display: none !important;
-    }
-    .sm-img {
-      width: 85%;
-      height: 70vh;
-      margin: auto !important;
-      display: block;
-      border-radius: 15px;
-      // justify-content: center;
-      // align-items: center;
-    }
     .clearCarousel {
       display: none !important;
-    }
-    .homeRouter {
-      width: 100%;
-      height: 89.5vh;
-      z-index: 1 !important;
     }
 
     // .slide-enter-from {

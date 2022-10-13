@@ -1,7 +1,14 @@
 <template>
-  <div id="carousel-side">
+  <div
+    id="carousel-side"
+    v-if="
+      !['Dashboard', 'FundAccount', 'Withdraw', 'SetPin', 'Payment'].includes(
+        $route.name
+      )
+    "
+  >
     <div class="row m-0 p-0">
-      <div class="col-lg-6 m-0 p-0">
+      <div class="col-12 m-0 p-0">
         <div
           id="carouselExampleIndicators"
           class="carousel slide"
@@ -70,3 +77,8 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  methods: {},
+};
+</script>

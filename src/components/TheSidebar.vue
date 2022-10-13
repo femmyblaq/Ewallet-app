@@ -27,7 +27,7 @@
           class="px-5 p-y-2 text-dark"
           active-class="active"
         >
-          <span class="material-icons"> monitoring </span>
+          <span class="material-icons"> account_balance_wallet </span>
           <span>Fund Account</span>
         </router-link>
         <router-link
@@ -91,7 +91,7 @@ export default {
   // padding: 0 20px;
   z-index: 1;
   transition: 200ms ease;
-  // box-shadow: 15px 8px 6px -6px rgb(235 234 242 / 58%);
+  box-shadow: 0 38px 0 0 20px rgb(235 234 242 / 58%);
   .avatar {
     width: 150px;
     height: 150px;

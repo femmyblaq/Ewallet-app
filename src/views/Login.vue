@@ -102,10 +102,6 @@ export default {
       email: "",
     };
   },
-  created() {
-    document.addEventListener("resize", this.isMobileMethod);
-    console.log("mobile view ", this.isMobileMethod);
-  },
   components: {
     // CarouselSideVue,
   },
@@ -128,8 +124,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 #login {
-  // margin: auto;
-  background-color: #fff;
+  // width: 50%;
+  // height: 89.4vh;
+  // overflow: hidden;
+  // position: absolute;
+  // top: 70px;
+  // right: 0;
+  // background-color: #fff;
   &::-webkit-scrollbar {
     display: none;
   }
@@ -156,11 +157,10 @@ export default {
     display: none;
   }
   #login {
-    width: 100%;
-    height: 89.8vh;
-    overflow: hidden;
-    // border: 1px solid #fff;
-    top: 70px;
+    // width: 100%;
+    // height: 89.8vh;
+    // overflow: hidden;
+    // top: 70px;
 
     z-index: 11111 !important;
     .card-body {

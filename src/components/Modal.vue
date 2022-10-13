@@ -30,14 +30,13 @@ export default {
 #modal {
   // background: rgba(255, 255, 255, 0.5);
   // opacity: 25%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 1111;
-  top: 0;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  // width: 100%;
+  // height: 100%;
+  // z-index: 1111;
+  // margin: auto;
   .modal-inner {
     width: 400px;
     // height: 200px;

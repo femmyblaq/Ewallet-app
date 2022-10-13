@@ -59,6 +59,7 @@
             </div>
 
             <div class="form-outline mb-3">
+              <!-- <div>{{ $v }}</div> -->
               <input
                 type="email"
                 id="form2"
@@ -90,7 +91,7 @@
               >
             </div>
 
-            <div class="pt-1 mb-4">
+            <div class="pt-1 mb-4" v-if="mobileView">
               <button
                 class="btn btn-dark btn-lg w-100 rounded-0 btn-block"
                 type="submit"
@@ -124,6 +125,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+// import { required, email } from "vuelidate/lib/validators";
 // import CarouselSideVue from "../components/CarouselSide.vue";
 export default {
   data() {
@@ -132,11 +134,15 @@ export default {
       lastName: "",
       password: "",
       email: "",
+      mobileView: false,
     };
   },
-  components: {
-    // CarouselSideVue
-  },
+  // validations: {
+  //   email: {
+  //     required,
+  //     email,
+  //   },
+  //},
   computed: {
     ...mapGetters(["toggleLight"]),
   },
@@ -156,11 +162,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-#register {
-  overflow: hidden;
-  margin: auto;
-  background-color: #fff;
-}
 @media (min-width: 200px) and (max-width: 450px) {
   .carousel-side {
     display: none;
@@ -185,13 +186,6 @@ export default {
   }
 }
 @media (min-width: 540px) and (max-width: 1024px) {
-  #register {
-    overflow: hidden;
-    width: 100%;
-    padding: 50px;
-    height: 70.7vh;
-    top: 87.8%;
-  }
   form {
     padding-bottom: 40px;
   }

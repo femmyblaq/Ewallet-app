@@ -5,6 +5,7 @@ export default createStore({
     lightToggle: false,
     logoutToggle: false,
     sidebarToggle: false,
+    windowWidth: null,
     mobileView: false,
   },
   mutations: {
@@ -19,17 +20,17 @@ export default createStore({
       state.sidebarToggle = !state.sidebarToggle;
       console.log("sidebar toggle ", state.sidebarToggle);
     },
-    IS_MOBILE(state) {
-      const screenWidth = window.innerWidth;
-      if (screenWidth <= 750) {
+    MOBILE(state) {
+      state.windowWidth = window.innerWidth;
+      if (state.windowWidth <= 550) {
         state.mobileView = true;
       }
       console.log("screen width: ", state.mobileView);
     },
   },
   actions: {
-    isMobileMethod(commit) {
-      commit("IS_MOBILE");
+    isMobileMethod({ commit }) {
+      commit("MOBILE");
     },
   },
   getters: {
