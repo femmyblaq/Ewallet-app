@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <CarouselSideVue /> -->
-    <div id="home" :class="{ darkMode: toggleLight }">
+    <div id="home">
       <!-- v-if="!['Login', 'Register', 'ForgotPassword'].includes($route.name)" -->
       <div class="home d-flex justify-content-center">
         <div class="welcome">
@@ -60,12 +60,14 @@ export default {
 #home {
   // width: 50%;
   height: calc(100vh - 70px);
+  border: 2px solid #f00;
 
   .home {
     height: 100%;
+    border: 2px solid #ff0;
 
     .welcome {
-      border: 1px solid #f00;
+      border: 1px solid #f0f;
       margin: auto 30px;
     }
   }
@@ -114,7 +116,7 @@ export default {
     height: 10vh;
     .home {
       display: block !important;
-      padding: 20px;
+      padding: 0 20px;
       align-items: end;
       width: 100%;
       margin-top: 50px;

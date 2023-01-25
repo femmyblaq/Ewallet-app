@@ -3,11 +3,11 @@
     <div class="carousel-side">
       <!-- <CarouselSideVue /> -->
     </div>
-    <div id="login" :class="{ darkMode: toggleLight }">
+    <div id="login">
       <div class="d-flex align-items-end justify-content-center">
-        <div class="card-body p-4 p-lg-5 text-black">
-          <form @submit.prevent="onSubmit">
-            <div class="d-flex align-items-center mb-3 pb-1">
+        <div class="card-body p-4 p-lg-4 text-black">
+          <Form @submit="onSubmit" :validation-schema="schema">
+            <div class="d-flex align-items-center mb-3">
               <!-- <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i> -->
               <router-link to="/"
                 ><img src="../assets/e-wallet-logo.png" alt=""
@@ -16,7 +16,7 @@
             </div>
 
             <h5
-              class="fw-normal mb-3 pb-3"
+              class="fw-normal mb-3"
               style="letter-spacing: 1px"
               :class="{ h5: toggleLight }"
             >
@@ -24,32 +24,53 @@
             </h5>
 
             <div class="form-outline mb-4">
-              <input
-                type="email"
-                id="form2"
-                class="form-control form-control-lg rounded-0"
-                :class="{ inputss: toggleLight }"
+              <!-- <ErrorMessage name="email" /> -->
+              <Field
+                name="email"
                 v-model="email"
-              />
+                :rules="rules"
+                v-slot="{ field, errorMessage, meta }"
+              >
+                <span class="text-success" v-if="meta.valid && meta.touched"
+                  >✅ Field is valid</span
+                >
+                <span>{{ errorMessage }}</span>
+                <input
+                  type="email"
+                  v-bind="field"
+                  class="form-control form-control-lg rounded-0"
+                  :class="{ inputss: toggleLight, err: !meta.valid }"
+                />
+              </Field>
               <label
                 class="form-label"
-                for="form2"
+                for="email"
                 :class="{ label: toggleLight }"
-                >Email address</label
+                >Email</label
               >
             </div>
 
             <div class="form-outline mb-4">
-              <input
-                type="password"
-                id="form"
-                class="form-control form-control-lg rounded-0"
-                :class="{ inputss: toggleLight }"
+              <Field
+                name="password"
                 v-model="password"
-              />
+                :rules="rules"
+                v-slot="{ field, errorMessage, meta }"
+              >
+                <span class="text-success" v-if="meta.valid && meta.touched">
+                  ✅ Password is valid</span
+                >
+                <span>{{ errorMessage }}</span>
+                <input
+                  type="password"
+                  v-bind="field"
+                  class="form-control form-control-lg rounded-0"
+                  :class="{ inputss: toggleLight, err: !meta.valid }"
+                />
+              </Field>
               <label
                 class="form-label"
-                for="form"
+                for="password"
                 :class="{ label: toggleLight }"
                 >Password</label
               >
@@ -84,7 +105,7 @@
                 >Register here</router-link
               >
             </p>
-          </form>
+          </Form>
         </div>
       </div>
     </div>
@@ -93,19 +114,27 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-// import CarouselSideVue from "../components/CarouselSide.vue";
+import * as yup from "yup";
+import { Form, Field } from "vee-validate";
+import axios from "axios";
 
 export default {
   data() {
-    return {
-      password: "",
-      email: "",
-    };
+    return {};
   },
+
   components: {
     // CarouselSideVue,
+    Form,
+    Field,
   },
   computed: {
+    schema() {
+      return yup.object({
+        email: yup.string().required().email(),
+        password: yup.string().required().min(8),
+      });
+    },
     ...mapGetters(["toggleLight"]),
   },
   methods: {
@@ -115,6 +144,12 @@ export default {
         password: this.password,
       };
       console.log("Login Information", loginInfo);
+      axios
+        .post("https://e-wallet-system.up.railway.app/register", loginInfo)
+        .then((res) => {
+          console.log("Response", res);
+        })
+        .catch((err) => console.log("Error", err));
     },
     ...mapActions(["isMobileMethod"]),
   },
@@ -133,6 +168,13 @@ export default {
   // background-color: #fff;
   &::-webkit-scrollbar {
     display: none;
+  }
+  form span {
+    color: #f00;
+  }
+  .err:focus {
+    box-shadow: 0 0 0 0.25rem rgba(249, 51, 24, 0.25);
+    border-color: #f00;
   }
 }
 .h5,

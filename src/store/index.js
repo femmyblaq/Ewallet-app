@@ -22,7 +22,11 @@ export default createStore({
     },
     MOBILE(state) {
       state.windowWidth = window.innerWidth;
-      if (state.windowWidth <= 550) {
+      if (
+        state.windowWidth <= 550 &&
+        this.routes.name === "Login" &&
+        this.routes.name === "Register"
+      ) {
         state.mobileView = true;
       }
       console.log("screen width: ", state.mobileView);

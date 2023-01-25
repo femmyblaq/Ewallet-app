@@ -101,4 +101,65 @@ export default {
     font-size: 2rem !important;
   }
 }
+@media (min-width: 750px) and (max-width: 1150px) {
+  #theBottom {
+    width: 100%;
+    height: 300px !important;
+    z-index: 1;
+
+    ul {
+      padding: 20px !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr 1fr !important;
+      a {
+        padding: 40px 60px !important;
+        margin: auto;
+        border-radius: 28px;
+
+        &__:hover {
+          border: 2px solid #fd7e14;
+        }
+      }
+      a.active {
+        border: 2px solid #fd7e14;
+        background-color: rgb(228, 226, 226);
+      }
+      .material-icons {
+        font-size: 3rem !important;
+      }
+    }
+  }
+  .material-icons {
+    font-size: 2rem !important;
+  }
+}
+@media (min-width: 451px) and (max-width: 750px) {
+  #theBottom {
+    width: 100%;
+    height: 200px !important;
+    z-index: 1;
+
+    ul {
+      padding: 15px !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr 1fr !important;
+      a {
+        padding: 20px 30px !important;
+        margin: auto;
+        border-radius: 18px;
+
+        &__:hover {
+          border: 2px solid #fd7e14;
+        }
+      }
+      a.active {
+        border: 2px solid #fd7e14;
+        background-color: rgb(228, 226, 226);
+      }
+    }
+  }
+  .material-icons {
+    font-size: 2rem !important;
+  }
+}
 </style>

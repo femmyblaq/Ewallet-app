@@ -1,5 +1,6 @@
 <template>
   <div id="app" :class="{ darkMode: toggleLight }">
+    <Preloadeer />
     <Header
       v-if="
         !['Dashboard', 'FundAccount', 'Withdraw', 'SetPin', 'Payment'].includes(
@@ -8,7 +9,7 @@
       "
     />
     <div class="d-grid">
-      <CarouselSideVue />
+      <CarouselSideVue v-show="mobileView" />
       <transition name="slide">
         <router-view />
       </transition>
@@ -16,34 +17,58 @@
   </div>
 </template>
 <script>
+// https://e-wallet-system.up.railway.app/
 import { mapGetters, mapActions } from "vuex";
 import CarouselSideVue from "./components/CarouselSide.vue";
-// import HomePage from "./views/Home.vue";
 import Header from "@/components/Header";
+import Preloadeer from "./components/Preloadeer.vue";
 
+// import rout from "./router/index";
 export default {
   data() {
     return {
-      mobileView: false,
+      mobileView: true,
+      rmCarousel: false,
+      screen: 450,
     };
   },
   components: {
     Header,
+    Preloadeer,
     CarouselSideVue,
-    // HomePage,
   },
   created() {
-    this.isMobileMethod();
-    if (this.$route.name === "Register") {
-      document.addEventListener("resize", this.isMobileMethod);
+    // const routes = rout.options.routes;
+    // const login = routes[1].name;
+    // const register = routes[2].name;
+
+    // Trying to remove my carousel on my mobileView
+    const screenWidth = window.innerWidth < this.screen;
+    const loginRoute = this.$route.name;
+    console.log(screenWidth);
+    if (loginRoute === "Login" && screenWidth) {
+      this.mobileView = false;
     }
-    console.log("Created hook at the app page..");
+    console.log("Direct Route ==>", this.$route);
+
+    // trying to get my current darkMode boolean
+    const darkMode = localStorage.getItem("darkMode");
+    if (darkMode === "true") {
+      this.darkMode = true;
+    }
   },
   methods: {
     ...mapActions(["isMobileMethod"]),
   },
   computed: {
     ...mapGetters(["toggleLight"]),
+  },
+  watch: {
+    darkMode: {
+      handler(newValue) {
+        localStorage.setItem("darkMode", newValue);
+      },
+    },
   },
 };
 </script>
@@ -53,7 +78,8 @@ export default {
   margin: 0;
   padding: 0;
   transition: all 0.5s ease;
-  font-family: "Source Sans Pro", "Titilium Web", "Open Sans";
+  font-weight: 500;
+  font-family: "Roboto Condensed", "Titilium Web", "Open Sans";
 }
 .backgroundDark {
   background-color: rgba(0, 0, 0, 0.9) !important;
@@ -64,7 +90,9 @@ export default {
   overflow: hidden;
 }
 #app {
-  height: calc(100vh - 70px);
+  // height: 100vh;
+  overflow: hidden;
+  // border: 2px solid #00f;
   .slide-enter-active,
   .slide-leave-active {
     transition: 0.8s ease all;
@@ -89,8 +117,9 @@ export default {
     grid-template-columns: 1fr 1fr;
   }
 }
-@media (min-width: 540px) and (max-width: 1024px) {
+@media (min-width: 540px) and (max-width: 1180px) {
   #app {
+    // height: 600px;
     position: static;
     overflow: scroll !important;
     display: grid !important;
@@ -99,7 +128,7 @@ export default {
       grid-template-columns: 1fr;
     }
     .lg-img {
-      height: 70vh;
+      height: 50vh;
       width: 100% !important;
     }
   }
@@ -108,7 +137,8 @@ export default {
   #app {
     height: 100vh;
     .carousel-indicators {
-      bottom: -50px !important;
+      bottom: -60px !important;
+      margin-bottom: 0px !important;
     }
     .carousel-indicators button {
       background-color: #444 !important;
@@ -121,11 +151,12 @@ export default {
       display: none !important;
     }
     .sm-img {
-      width: 85%;
+      width: 80%;
       height: 75vh;
       margin: auto !important;
       display: block;
       border-radius: 15px;
+      padding-top: 50px;
       // justify-content: center;
       // align-items: center;
     }
@@ -145,7 +176,7 @@ export default {
     .carousel-item {
       img {
         margin: 20px auto !important;
-        // padding: 20px;
+        padding-top: 20px;
       }
       .lg-img {
         display: none !important;
@@ -164,7 +195,7 @@ export default {
       display: block !important;
     }
     .carousel-indicators {
-      bottom: -60px !important;
+      bottom: -50px !important;
       z-index: 1 !important;
     }
     .carousel-indicators button {

@@ -6,25 +6,16 @@
           src="../assets/e-wallet-logo.png"
           alt=""
       /></router-link>
-      <!-- <span style="width: 10px; height: 10px; background-color: #000"></span> -->
-      <!-- <i class="fa-solid fa-brightness fa-3x"></i> -->
       <div>
-        <!-- <span
-            class="material-icons"
-            :class="{ color: toggleLight }"
-            @click="toggleLightMethod"
-            ref="changeIcon"
-          >
-            light_mode
-          </span> -->
-        <!-- <span
-            class="material-symbols-outlined"
-            :class="{ color: toggleLight }"
-            @click="toggleLightMethod"
-          >
-            mode_nightnpm
-          </span> -->
-        <div class="d-flex justify-content-center align-items-center">
+        <span
+          class="material-symbols-outlined"
+          ref="night"
+          :class="{ color: toggleLight }"
+          @click="toggleLightMethod"
+        >
+          dark_mode
+        </span>
+        <!-- <div class="d-flex justify-content-center align-items-center">
           <span
             class="button"
             :class="{ 'main-button': toggleLight }"
@@ -34,7 +25,7 @@
               :class="{ 'inner-button': toggleLight }"
             ></span
           ></span>
-        </div>
+        </div> -->
         <!--<span class="material-symbols-outlined"> dark_mode </span> -->
       </div>
     </div>
@@ -46,18 +37,24 @@ export default {
   data() {
     return {
       mobile: false,
+      color: "silver",
     };
   },
 
   methods: {
     ...mapMutations(["TOGGLE_LIGHT"]),
     toggleLightMethod() {
-      this.TOGGLE_LIGHT();
-      this.$refs.changeIcon.innerHTML = "&#xe51c;";
+      if (this.TOGGLE_LIGHT()) this.$refs.night.innerHTML = "&#xe51c;";
+      else this.$refs.night.innerHTML = "&#xe518;";
     },
-  },
-  computed: {
-    ...mapGetters(["toggleLight"]),
+    beforeRouteEnter(to, from, next) {
+      next((vm) => {
+        vm.$store.dispatch("toggleLight");
+      });
+    },
+    computed: {
+      ...mapGetters(["toggleLight"]),
+    },
   },
 };
 </script>
@@ -75,6 +72,7 @@ export default {
 .darkMode {
   background-color: rgba(0, 0, 0, 0.88) !important;
   transition: all 0.5s ease;
+  border-bottom: 2px solid #ddd;
   box-shadow: 20 0.125rem 0.25rem rgba(252, 250, 250, 0.75) !important;
 }
 #header {
@@ -117,6 +115,9 @@ export default {
     left: 21px !important;
     background: rgb(66, 66, 67);
   }
+  .color {
+    color: #ccc !important;
+  }
 }
 img {
   width: 150px;
@@ -124,9 +125,7 @@ img {
 .material-symbols-outlined {
   cursor: pointer;
 }
-.color {
-  color: #ccc !important;
-}
+
 @media (min-width: 200px) and (max-width: 450px) {
   #header {
     padding: 10px 15px;

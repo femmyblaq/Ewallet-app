@@ -8,7 +8,6 @@
         <Modal v-show="logoutToggle" />
       </transition>
     </div>
-
     <div class="the-bottom d-none">
       <TheBottom />
     </div>
@@ -69,6 +68,17 @@ export default {
   #dashboard {
     .main {
       width: 100%;
+    }
+    .the-bottom {
+      display: block !important;
+    }
+  }
+}
+
+@media (min-width: 650px) and (max-width: 1150px) {
+  #dashboard {
+    .main {
+      width: 100% !important;
     }
     .the-bottom {
       display: block !important;

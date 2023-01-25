@@ -175,4 +175,70 @@ export default {
     transform: translateX(0) !important;
   }
 }
+
+@media (min-width: 750px) and (max-width: 1150px) {
+  #sidebar {
+    // margin-left: -40%;
+    transform: translateX(-800px);
+    z-index: 1111;
+    width: 50%;
+    .brand {
+      background-color: rgb(253, 251, 251);
+      padding: 15px 10px !important;
+    }
+    .avatar {
+      width: 75px;
+      height: 70px;
+    }
+    .content {
+      padding: 0 15px;
+    }
+
+    .text-box {
+      h1 {
+        font-size: 1.3rem;
+      }
+      h4 {
+        font-size: 1rem;
+      }
+    }
+    .nav-container {
+      display: none !important;
+    }
+  }
+  .sidebar {
+    transform: translateX(0) !important;
+  }
+}
+@media (min-width: 451px) and (max-width: 750px) {
+  #sidebar {
+    width: 60%;
+    .brand {
+      background-color: rgb(253, 251, 251);
+      padding: 15px 10px !important;
+    }
+    .avatar {
+      width: 75px;
+      height: 70px;
+    }
+    .content {
+      padding: 0 10px;
+    }
+
+    .text-box {
+      h1 {
+        font-size: 1.3rem;
+      }
+      h4 {
+        font-size: 1rem;
+      }
+    }
+    .nav-container {
+      display: none !important;
+    }
+  }
+  .sidebar {
+    transform: translateX(0) !important;
+  }
+}
 </style>

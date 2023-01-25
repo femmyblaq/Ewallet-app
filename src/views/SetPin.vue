@@ -61,16 +61,19 @@ export default {
 #setpin {
   width: 60%;
   //   height: 80%;
+
   margin: auto;
   padding: 40px;
-  background-color: #fff;
+  background-color: rgb(7, 197, 181);
 
   .otp-field {
+    width: 70%;
+    border: 2px solid #fd7e14;
     display: flex;
-    // grid-template-columns: 1fr;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    margin: auto;
+    justify-content: space-evenly;
+    // align-items: center;
+    // height: 100%;
   }
 
   .otp-field input::-webkit-outer-spin-button,
@@ -84,16 +87,16 @@ export default {
   }
 
   .otp-field input {
-    width: 37px;
+    width: 44px;
     font-size: 18px;
     padding: 18px;
     text-align: center;
     border-radius: 5px;
-    height: 37px;
+    height: 44px;
     margin: 4px;
     border: 2px solid rgba(255, 255, 255, 0.5);
     background: rgba(100, 100, 100, 0.2);
-    color: #fff;
+    color: #f00;
     outline: none;
     transition: all 0.1s;
   }
@@ -108,6 +111,11 @@ export default {
   }
 }
 @media (min-width: 200px) and (max-width: 450px) {
+  #setpin {
+    width: 90%;
+  }
+}
+@media (min-width: 650px) and (max-width: 1150px) {
   #setpin {
     width: 90%;
   }

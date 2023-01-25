@@ -70,4 +70,12 @@ export default {
     width: 90%;
   }
 }
+@media (min-width: 650px) and (max-width: 1150px) {
+  #funding {
+    width: 90%;
+  }
+  .transaction {
+    width: 90%;
+  }
+}
 </style>
